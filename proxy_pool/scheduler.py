@@ -5,7 +5,8 @@
 import time
 from multiprocessing import Process
 from proxy_pool.getter import Getter
-from proxy_pool.setting import GETTER_CYCLE, GETTER_ENABLED
+from proxy_pool.tester import Tester
+from proxy_pool.setting import GETTER_CYCLE, GETTER_ENABLED, TESTER_CYCLE, TESTER_ENABLED
 
 
 class Scheduler(object):
@@ -19,12 +20,25 @@ class Scheduler(object):
             getter.run()
             time.sleep(cycle)
 
+    def schedule_tester(self, cycle=TESTER_CYCLE):
+        """
+        定时测试代理
+        """
+        tester = Tester()
+        while True:
+            print('测试器开始运行')
+            tester.run()
+            time.sleep(cycle)
+
     def run(self):
         print('代理池开始运行')
 
         if GETTER_ENABLED:
             getter_process = Process(target=self.schedule_getter)
             getter_process.start()
+        if TESTER_ENABLED:
+            tester_process = Process(target=self.schedule_tester)
+            tester_process.start()
 
 
 if __name__ == '__main__':

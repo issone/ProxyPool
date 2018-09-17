@@ -22,5 +22,15 @@ POOL_UPPER_THRESHOLD = 50000
 # 获取周期
 GETTER_CYCLE = 300
 
+# 测试API，建议抓哪个网站测哪个
+TEST_URL = 'http://www.baidu.com'
+
+# 检查周期
+TESTER_CYCLE = 20
+
+# 每批运行的测试量
+BATCH_TEST_SIZE = 10
+
 # 开关
 GETTER_ENABLED = True
+TESTER_ENABLED = True
