@@ -29,8 +29,13 @@ TEST_URL = 'http://www.baidu.com'
 TESTER_CYCLE = 20
 
 # 每批运行的测试量
-BATCH_TEST_SIZE = 10
+BATCH_TEST_SIZE = 30
 
 # 开关
 GETTER_ENABLED = True
 TESTER_ENABLED = True
+API_ENABLED = True
+
+# API配置
+API_HOST = '0.0.0.0'
+API_PORT = 5000

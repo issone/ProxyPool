@@ -6,7 +6,8 @@ import time
 from multiprocessing import Process
 from proxy_pool.getter import Getter
 from proxy_pool.tester import Tester
-from proxy_pool.setting import GETTER_CYCLE, GETTER_ENABLED, TESTER_CYCLE, TESTER_ENABLED
+from proxy_pool.api import app
+from proxy_pool.setting import *
 
 
 class Scheduler(object):
@@ -30,6 +31,12 @@ class Scheduler(object):
             tester.run()
             time.sleep(cycle)
 
+    def schedule_api(self):
+        """
+        开启API
+        """
+        app.run(API_HOST, API_PORT)
+
     def run(self):
         print('代理池开始运行')
 
@@ -39,7 +46,9 @@ class Scheduler(object):
         if TESTER_ENABLED:
             tester_process = Process(target=self.schedule_tester)
             tester_process.start()
-
+        if API_ENABLED:
+            api_process = Process(target=self.schedule_api)
+            api_process.start()
 
 if __name__ == '__main__':
     pass
